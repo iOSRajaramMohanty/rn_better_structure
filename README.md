@@ -1,4 +1,4 @@
-# React Native Better Structure
+# React Native Better Folder Structure
 
 This project aims to be a strong foundation for react-native applications. It provides a clear and organized structure, core dependencies, and boilerplate to jumpstart development.
 
