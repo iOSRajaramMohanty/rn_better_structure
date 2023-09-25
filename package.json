@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.19.3",
     "@react-native-community/cli-platform-android": "^11.3.8",
     "@react-native-community/cli-platform-ios": "^11.3.8",
     "@react-navigation/bottom-tabs": "^6.5.8",
@@ -23,11 +24,12 @@
     "react-native": "0.70.13",
     "react-native-bootsplash": "^5.0.3",
     "react-native-config": "^1.5.1",
+    "react-native-gesture-handler": "^2.12.1",
     "react-native-localization": "^2.3.2",
-    "react-native-mmkv-storage": "^0.9.1",
     "react-native-reanimated": "^3.5.2",
     "react-native-safe-area-context": "^4.7.2",
     "react-native-screens": "^3.25.0",
+    "react-redux": "^8.1.2",
     "redux": "^4.2.1",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.2"

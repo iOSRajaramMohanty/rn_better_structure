@@ -11,49 +11,30 @@ import {
   SafeAreaView,
   ScrollView,
   StatusBar,
-  StyleSheet,
-  Text,
   useColorScheme,
-  View,
+  StyleSheet,
 } from "react-native";
 
 import {
   Colors,
-  DebugInstructions,
   Header,
-  LearnMoreLinks,
-  ReloadInstructions,
 } from "react-native/Libraries/NewAppScreen";
+
+import { hide } from 'react-native-bootsplash';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistor, store } from '@/store';
+import { networkService } from '@/networking';
+import { RootNavigator } from './naviagtion';
 
 /* $FlowFixMe[missing-local-annot] The type annotation(s) required by Flow's
  * LTI update could not be added via codemod */
-const Section = ({ children, title }) => {
-  const isDarkMode = useColorScheme() === "dark";
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}
-      >
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}
-      >
-        {children}
-      </Text>
-    </View>
-  );
-};
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 const App = () => {
   const isDarkMode = useColorScheme() === "dark";
@@ -61,60 +42,38 @@ const App = () => {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+  const handleStoreRehydration = () => {
+    const { accessToken } = store.getState().user;
 
+    if (accessToken) {
+      networkService.setAccessToken(accessToken);
+    }
+
+    hide();
+  };
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
         barStyle={isDarkMode ? "light-content" : "dark-content"}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-      <ScrollView
+      <Provider store={store}>
+      <PersistGate onBeforeLift={handleStoreRehydration} persistor={persistor}>
+      {/* <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}
-      >
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}
-        >
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
+      > */}
+        <GestureHandlerRootView style={styles.container}>
+        {/* <Header /> */}
+        <RootNavigator />
+        </GestureHandlerRootView>
+      {/* </ScrollView> */}
+      </PersistGate>
+      </Provider>
     </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: "600",
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: "400",
-  },
-  highlight: {
-    fontWeight: "700",
-  },
-});
+
 
 export default App;
