@@ -26,6 +26,18 @@ target 'rn_better_structure' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  target 'Dev' do
+    # Development-specific pods
+  end
+
+  target 'Production' do
+    # Production-specific pods
+  end
+
+  target 'Staging' do
+    # Staging-specific pods
+  end
+  
   target 'rn_better_structureTests' do
     inherit! :complete
     # Pods for testing

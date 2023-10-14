@@ -2,8 +2,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useTheme } from '@react-navigation/native';
 import React from 'react';
 import { TabBarIcon } from '@/components';
-import { HomeNavigator } from './HomeNavigator';
-// import { ProfileNavigator } from '@/navigation/ProfileNavigator';
+import { HomeNavigator } from '@/navigation/HomeNavigator';
+import { ProfileNavigator } from '@/navigation/ProfileNavigator';
 import { TABS } from '@/constants/navigation';
 
 const Tab = createBottomTabNavigator();
@@ -21,7 +21,7 @@ export function AppNavigator() {
       })}
     >
       <Tab.Screen name={TABS.home} component={HomeNavigator} />
-      {/* <Tab.Screen name={TABS.profile} component={ProfileNavigator} /> */}
+      <Tab.Screen name={TABS.profile} component={ProfileNavigator} />
     </Tab.Navigator>
   );
 }

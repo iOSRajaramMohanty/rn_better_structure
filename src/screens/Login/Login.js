@@ -8,7 +8,7 @@ import { strings } from '@/localization';
 import { styles } from '@/screens/Login/Login.styles';
 import { errorsSelector } from '@/selectors/ErrorSelectors';
 import { isLoadingSelector } from '@/selectors/StatusSelectors';
-import { shadow,spacing } from '@/theme';
+import { shadow } from '@/theme';
 
 export function Login() {
   const { colors } = useTheme();
@@ -23,8 +23,8 @@ export function Login() {
   };
 
   return (
-    <View style={[{flex: 1, alignItems: 'center', justifyContent: 'center',backgroundColor:'#D32F2F'}]}>
-      {/* <View style={[styles.formContainer, shadow.primary, { backgroundColor: colors.primary }]}>
+    <View style={styles.container}>
+      <View style={[styles.formContainer, shadow.primary, { backgroundColor: colors.primary }]}>
         <TextField
           autoCapitalize="none"
           accessibilityHint={strings.login.usernameHint}
@@ -49,7 +49,7 @@ export function Login() {
           style={styles.submitButton}
           title={isLoading ? strings.common.loading : strings.login.button}
         />
-      </View> */}
+      </View>
     </View>
   );
 }
